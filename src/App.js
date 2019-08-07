@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import DatePicker from 'react-date-picker';
+// import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import './App.css';
 
 function App() {
+  
+  const [dateEntrySelected, setDateEntrySelected] = useState(new Date());
+  
+  // const handleInputDate = date => {
+  //   setDateSelected(date);
+  //   console.log(selected)
+  // }
+  // .toISOString().slice(0, 10)
+
+  const handleChange = (value) => {
+      const newValue = value.toISOString().slice(0, 10)
+      setDateEntrySelected(value)
+      console.log(value)
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input type="date" onChange={event=> console.log(event.target.value)}/>
+      <DatePicker
+          onChange={handleChange}
+          value={dateEntrySelected}
+          name="checkIn"
+      />
     </div>
   );
 }
